@@ -1,0 +1,33 @@
+-- Write a Query to check if any duplicates are there in pk
+
+Select cst_id, Count(*)
+from bronze.crm_cust_info
+group by cst_id
+having count(*) > 1;
+
+-- Check for unwanted spaces in firstname values --
+
+Select cst_firstname from bronze.crm_cust_info
+where cst_firstname != trim(cst_firstname);
+
+-- Check for unwanted spaces in lastname values --
+
+Select cst_lastname from bronze.crm_cust_info
+where cst_lastname != trim(cst_lastname);
+
+-- Check for unwanted spaces in marital_status values --
+
+Select cst_marital_status from bronze.crm_cust_info
+where cst_marital_status != trim(cst_marital_status);
+
+-- Check for unwanted spaces in gender values --
+
+Select cst_gndr from bronze.crm_cust_info
+where cst_gndr != trim(cst_gndr);
+
+
+-- Check values in gender and status col
+
+SELECT DISTINCT cst_gndr from bronze.crm_cust_info;
+        
+SELECT DISTINCT cst_marital_status from bronze.crm_cust_info;
