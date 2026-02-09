@@ -1,0 +1,45 @@
+-- Checking for unwanted spaces in order num --
+
+Select * from bronze.crm_sales_details
+where sls_ord_num != trim(sls_ord_num);
+
+Select * from bronze.crm_sales_details
+where sls_ord_num IS NULL;
+
+
+-- Check if any product keys are there in sales details which are not in crm_prd_info table --
+
+Select * from bronze.crm_sales_details
+where sls_prd_key NOT In (Select prd_key from silver.crm_prd_info);
+
+
+-- Check if any cust id are there in sales details which are not in crm_cst_info table --
+
+Select * from bronze.crm_sales_details
+where sls_cust_id NOT In (Select cst_id from silver.crm_cust_info);
+
+-- Checking for invalid dates like null, <= 0 and length must be 8 --
+
+Select 
+sls_order_dt
+from bronze.crm_sales_details
+Where sls_order_dt is Null or sls_order_dt <= 0 or Len(sls_order_dt) != 8;
+
+-- QC - order date must always must be earlier / less than the ship date or due date --
+
+Select * from bronze.crm_sales_details
+where sls_order_dt > sls_ship_dt or sls_order_dt > sls_due_dt;
+
+
+-- sales, Qnty and Price --
+
+-- sales - qty * price
+-- price - sales / qty
+-- Qty - sales / price
+
+-- sls_sales is null or sls_sales != sls_quantity * sls_price
+
+-- sls_quantity is null or sls_quantity != sls_sales / sls_price or sls_quantity
+
+Select sls_sales, sls_quantity, sls_price from bronze.crm_sales_details
+Where sls_sales Is null or sls_sales != sls_quantity / sls_price or sls_quantity <= 0;
