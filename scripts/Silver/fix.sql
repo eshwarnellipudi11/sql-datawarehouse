@@ -123,3 +123,19 @@ Select
 	Else 'n/a'
 	End As gen
 from bronze.erp_cust_az12;
+
+-- Inserting the data in silver.erp_loc_a101 --
+
+INSERT INTO silver.erp_loc_a101(
+	cid,
+	cntry
+)
+Select
+replace(cid, '-', '') As Cid,
+CASE
+WHEN TRIM(cntry) IN ('DE', 'Germany') THEN 'Germany'
+WHEN TRIM(cntry) IN ('US','USA', 'United states') THEN 'United States'
+WHEN TRIM(cntry) = '' OR cntry IS NULL then 'n/a'
+Else TRIM('n/a')
+End As cntry
+From bronze.erp_loc_a101;
