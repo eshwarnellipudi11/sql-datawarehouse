@@ -139,3 +139,14 @@ WHEN TRIM(cntry) = '' OR cntry IS NULL then 'n/a'
 Else TRIM('n/a')
 End As cntry
 From bronze.erp_loc_a101;
+
+
+-- Inserting the data in silver.erp_px_cat_g1v2 --
+
+INSERT INTO silver.erp_px_cat_g1v2(
+	id,
+	cat,
+	subcat,
+	maintenance
+) 
+SELECT * FROM bronze.erp_px_cat_g1v2;
