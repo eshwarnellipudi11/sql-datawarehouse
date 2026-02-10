@@ -1,0 +1,13 @@
+-- Check if if from erp_px_cat_g1v2 matches with id from crm_prd_info 
+
+Select * from bronze.erp_px_cat_g1v2;
+Select * from silver.crm_prd_info;
+
+-- Checking for unwanted spaces in cat and subcat
+
+Select * from bronze.erp_px_cat_g1v2
+Where cat != trim(cat) or subcat != trim(subcat);
+
+-- Lets see the values of maintainance --
+
+Select distinct maintenance from bronze.erp_px_cat_g1v2;
