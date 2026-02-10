@@ -1,0 +1,13 @@
+ -- Checking when cid isn't match with cst_key from crm_cust_info table
+
+ SELECT * from bronze.erp_cust_az12
+ WHERE cid Not Like 'NAS%';
+
+ -- checking if any birthday date is gether than today 
+
+Select distinct bdate from bronze.erp_cust_az12
+ where bdate > GETDATE() or bdate < '06-02-2026';
+
+ -- Qc -- on -- gender --
+
+ Select distinct gen from bronze.erp_cust_az12;
