@@ -1,0 +1,5 @@
+-- Qc - Checking if CID is matching with cst_key from silver.crm_cust_info --
+Select cid from bronze.erp_loc_a101;
+
+-- Qc - Country column --
+Select Distinct cntry from bronze.erp_loc_a101;
