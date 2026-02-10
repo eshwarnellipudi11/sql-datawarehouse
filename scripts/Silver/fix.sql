@@ -94,11 +94,11 @@ INSERT INTO silver.crm_sales_details (
 			END AS sls_sales,
 			sls_quantity,
 			CASE 
-				WHEN sls_price IS NULL OR sls_price <= 0 
-					THEN sls_sales / NULLIF(sls_quantity, 0)
-				ELSE sls_price 
-			END AS sls_price
-		FROM bronze.crm_sales_details;
+		WHEN sls_price IS NULL OR sls_price <= 0 
+	THEN sls_sales / NULLIF(sls_quantity, 0)
+	ELSE sls_price 
+	END AS sls_price
+FROM bronze.crm_sales_details;
 
 
 -- Inserting the data in silver.erp_cust_az12 --
