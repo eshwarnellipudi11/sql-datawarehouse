@@ -101,3 +101,17 @@ Group by c.customer_key,
 	c.first_name,
 	c.last_name
 order by SUM(s.sales_amount) DESC; 
+
+-- generate a report that shows all keys metrics of the bussiness --\
+
+Select 'Total Sales' As measure_name, SUM(sales_amount) AS measure_value from gold.fact_sales
+UNION
+Select 'Average_price' As measure_name, Avg(price) AS measure_value from gold.fact_sales
+UNION
+Select 'Total Qty' As measure_name, SUM(quantity) AS measure_value from gold.fact_sales
+UNION
+Select 'Total Orders' As measure_name, COUNT(Distinct order_number) AS measure_value from gold.fact_sales
+UNION
+Select 'Total Products' As measure_name, COUNT(Distinct product_name) AS measure_value from gold.dim_products
+UNION
+Select 'Total Customers' As measure_name, COUNT(Distinct customer_key) AS measure_value from gold.dim_customers;
