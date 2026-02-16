@@ -100,7 +100,6 @@ INSERT INTO silver.crm_sales_details (
 	END AS sls_price
 FROM bronze.crm_sales_details;
 
-
 -- Inserting the data in silver.erp_cust_az12 --
 
 Insert Into silver.erp_cust_az12(
